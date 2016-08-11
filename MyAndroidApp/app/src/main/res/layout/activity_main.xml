@@ -25,6 +25,7 @@
         <EditText
             android:layout_width="0dp"
             android:layout_weight="2"
+            android:text="codekamp"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
@@ -42,6 +43,7 @@
         <EditText
             android:layout_width="0dp"
             android:layout_weight="2"
+            android:text="android"
             android:layout_height="wrap_content" />
     </LinearLayout>
 

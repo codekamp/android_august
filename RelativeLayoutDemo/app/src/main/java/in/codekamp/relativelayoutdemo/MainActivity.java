@@ -23,7 +23,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         usernameEditText = (EditText)findViewById(R.id.username_edittext);
         passwordEditText = (EditText)findViewById(R.id.password_edittext);
 
-        loginButton.setOnClickListener(this);
+        if (loginButton != null) {
+            loginButton.setOnClickListener(this);
+        }
     }
 
     @Override

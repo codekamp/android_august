@@ -13,7 +13,7 @@
         android:id="@+id/username_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="username"
+        android:text="@string/username_label"
         android:layout_above="@+id/username_edittext"
         />
 
@@ -30,7 +30,7 @@
         android:id="@+id/password_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="password"
+        android:text="@string/password_label"
         android:layout_centerVertical="true"
         />
 
@@ -47,8 +47,10 @@
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="login"
+        android:text="@string/login_label"
+        android:textColor="#f31313"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="-40dp"
         android:layout_below="@id/password_edittext"
         />
 </RelativeLayout>
