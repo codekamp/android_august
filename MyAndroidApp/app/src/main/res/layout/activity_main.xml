@@ -48,9 +48,16 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/login_button"
+        android:onClick="showRajnikant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#f12525"
+        android:background="@color/my_red"
         android:text="login" />
+
+    <TextView
+        android:id="@+id/result_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
