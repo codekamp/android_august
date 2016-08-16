@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         Intent showRajniIntent = RajnikantActivity.getNewIntent(this, 179, "hindi");
-        
+
         startActivity(showRajniIntent);
 
     }

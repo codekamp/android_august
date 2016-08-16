@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/song_info_row"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="#edbbbb"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/title_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:text="Hungama hai kyun barpa" />
+
+    <TextView
+        android:id="@+id/duration_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="4:30" />
+
+</LinearLayout>
