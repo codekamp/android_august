@@ -10,14 +10,12 @@ import android.widget.TextView;
  */
 public class SongViewHolder extends RecyclerView.ViewHolder {
 
-    public LinearLayout parentView;
     public TextView titleTextView;
     public TextView durationTextView;
 
     public SongViewHolder(View itemView) {
         super(itemView);
 
-        parentView = (LinearLayout)itemView;
         titleTextView = (TextView)itemView.findViewById(R.id.title_textview);
         durationTextView = (TextView)itemView.findViewById(R.id.duration_textview);
     }
