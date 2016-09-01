@@ -16,11 +16,7 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <fragment
-            android:id="@+id/loginfragment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            class="in.codekamp.fragmentdemo.LoginFragment" />
+
     </FrameLayout>
 
     <TextView

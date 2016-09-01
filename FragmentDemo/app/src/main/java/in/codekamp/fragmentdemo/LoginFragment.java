@@ -10,9 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class LoginFragment extends Fragment {
+
+    public LoginFragment() {}
+
+    private String state;
+
+    public LoginFragment(String state) {
+        this.state = state;
+    }
 
     private EditText usernameEditText;
     private EditText passwordEditText;
@@ -26,6 +35,9 @@ public class LoginFragment extends Fragment {
 
         usernameEditText = (EditText)view.findViewById(R.id.username_field);
         passwordEditText = (EditText)view.findViewById(R.id.password_field);
+        TextView stateTextView = (TextView)view.findViewById(R.id.state);
+
+        stateTextView.setText(state);
 
         Button button = (Button)view.findViewById(R.id.login);
 
