@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.FrameLayout;
 
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements LoginFragment.LoginFragmentListner {
+
+public class MainActivity extends AppCompatActivity implements LoginFragment.LoginFragmentListner, ListFetcher.ListFetcherListner {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,20 +36,15 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
     public void userLoggedIn(int userId) {
         Log.d("CodeKamp", "Activity notified about login of " + userId);
 
-        ListFetcher fetcher = new ListFetcher();
 
-        fetcher.execute("Ghaziabad", "Meerut");
 
-        DogFetcher fetcher1 = new DogFetcher();
-        fetcher1.execute(10, 20, 15);
+        ListFetcher fetcher = new ListFetcher(this);
 
-//        for (int i = 0; i< 100; i++) {
-//            try {
-//                Thread.sleep(10);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            Log.d("CodeKamp", "b " + i);
-//        }
+        fetcher.execute("87f83ca8aa474c398a3cc1ab26723991-us11");
+    }
+
+    @Override
+    public void listFetched(List<MailChimpList> list) {
+        //
     }
 }
