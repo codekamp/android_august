@@ -1,5 +1,7 @@
 package in.codekamp.restaurantapp;
 
+import android.database.sqlite.SQLiteDatabase;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,59 +17,38 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Callback<FetchMemebersResponse> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Gson gson = new GsonBuilder()
-                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
-                .create();
+        MailChimpService mailChimpService = Service.getMailChimpService();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://us11.api.mailchimp.com/2.0/")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
+        Call<FetchMemebersResponse> call = mailChimpService.fetchMembers("c13207fa3226b6a6b6aca1f7fa856efd-us11", "47734f63e3");
 
-        MailchimpService service = retrofit.create(MailchimpService.class);
+        call.enqueue(this);
 
+        Log.d("CodeKamp", "Hello world!");
 
-        Call<ListResponse> call = service.fetchLists("c13207fa3226b6a6b6aca1f7fa856efd-us11");
+        DatabaseHelper helper = new DatabaseHelper(this);
 
-        call.enqueue(new Callback<ListResponse>() {
-            @Override
-            public void onResponse(Call<ListResponse> call, Response<ListResponse> response) {
-                List<MailchimpList> list = response.body().getData();
+        SQLiteDatabase database = helper.getWritableDatabase();
+        database.execSQL("INSERT into xyz");
+    }
 
-                Log.d("CodeKamp", list.get(0).getName());
-                Log.d("CodeKamp", Integer.toString(list.get(0).getStats().getMemberCount()));
+    @Override
+    public void onResponse(Call<FetchMemebersResponse> call, Response<FetchMemebersResponse> response) {
+        FetchMemebersResponse res = response.body();
+        List<Contact> contacts = res.getContacts();
 
-            }
+        Log.d("CodeKamp", contacts.get(0).getEmail());
+        Log.d("CodeKamp", contacts.get(0).getName());
+    }
 
-            @Override
-            public void onFailure(Call<ListResponse> call, Throwable t) {
-                Log.d("CodeKamp", "on failure called " + t.getMessage());
-            }
-        });
-
-        Call<MemberResponse> call1 = service.fetchContacts("c13207fa3226b6a6b6aca1f7fa856efd-us11", "47734f63e3");
-
-        call1.enqueue(new Callback<MemberResponse>() {
-            @Override
-            public void onResponse(Call<MemberResponse> call, Response<MemberResponse> response) {
-
-                List<Contact> list = response.body().getContacts();
-
-                Log.d("CodeKamp", "Contact email is " + list.get(1).getEmail());
-                Log.d("CodeKamp", "Contact name is " + list.get(1).getMerges().getFNAME());
-            }
-
-            @Override
-            public void onFailure(Call<MemberResponse> call, Throwable t) {
-                Log.d("CodeKamp", "on failure called " + t.getMessage());
-            }
-        });
+    @Override
+    public void onFailure(Call<FetchMemebersResponse> call, Throwable t) {
+        Log.d("CodeKamp", "Failed with message " + t.getMessage());
     }
 }

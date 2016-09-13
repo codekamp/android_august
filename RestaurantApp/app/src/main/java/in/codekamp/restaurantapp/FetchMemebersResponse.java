@@ -1,28 +1,30 @@
-
 package in.codekamp.restaurantapp;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MemberResponse {
+import java.util.LinkedList;
+import java.util.List;
 
+/**
+ * Created by cerebro on 13/09/16.
+ */
+public class FetchMemebersResponse {
     @SerializedName("total")
     @Expose
-    private Integer total;
+    private int count;
 
     @SerializedName("data")
     @Expose
-    private List<Contact> contacts = new ArrayList<Contact>();
+    private List<Contact> contacts = new LinkedList<>();
 
 
-    public Integer getTotal() {
-        return total;
+    public int getCount() {
+        return count;
     }
 
-    public void setTotal(Integer total) {
-        this.total = total;
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public List<Contact> getContacts() {
