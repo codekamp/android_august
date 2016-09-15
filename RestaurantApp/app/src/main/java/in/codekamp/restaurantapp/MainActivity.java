@@ -1,5 +1,7 @@
 package in.codekamp.restaurantapp;
 
+import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
@@ -34,8 +36,19 @@ public class MainActivity extends AppCompatActivity implements Callback<FetchMem
 
         DatabaseHelper helper = new DatabaseHelper(this);
 
-        SQLiteDatabase database = helper.getWritableDatabase();
-        database.execSQL("INSERT into xyz");
+        SQLiteDatabase database = helper.getReadableDatabase();
+
+        Cursor cursor = database.query("todo", null, null, null, null, null, null);
+        TodoCursor cursor1 = new TodoCursor(cursor);
+
+
+        while(cursor1.moveToNext()) {
+            ToDo toDo = cursor1.getToDo();
+
+            Log.d("CodeKamp", "title is " + toDo.getTitle() + " and completed is " + toDo.getCompleted());
+        }
+
+
     }
 
     @Override
