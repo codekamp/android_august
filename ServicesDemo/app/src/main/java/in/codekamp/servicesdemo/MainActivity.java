@@ -26,11 +26,9 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
     }
 
     public void stopDownload(View view) {
-        Intent intent = new Intent(this, MyService.class);
+        Intent intent = new Intent(this, DownloadVideosService.class);
 
         stopService(intent);
-
-        unbindService(this);
     }
 
     @Override

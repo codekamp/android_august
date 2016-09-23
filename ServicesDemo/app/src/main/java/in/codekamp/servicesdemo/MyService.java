@@ -7,10 +7,16 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by cerebro on 20/09/16.
  */
-public class MyService extends Service {
+abstract public class MyService extends Service implements Runnable {
+
+    private Thread intentHandlingThread = null;
+    private List<Intent> intentsToBeHandled = new ArrayList<>();
 
     @Nullable
     @Override
@@ -29,6 +35,17 @@ public class MyService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d("CodeKamp", "onStartCommand called");
+
+
+
+        if(intentHandlingThread == null) {
+            intentHandlingThread = new Thread(this);
+            intentHandlingThread.start();
+        }
+
+
+        intentsToBeHandled.add(intent);
+
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -46,6 +63,21 @@ public class MyService extends Service {
     public void play() {
 
     }
+
+    @Override
+    public void run() {
+
+        while (intentsToBeHandled.size() > 0) {
+            Intent currentIntent = intentsToBeHandled.remove(0);
+
+            handleIntent(currentIntent);
+
+        }
+
+        stopSelf();
+    }
+
+    public abstract void handleIntent(Intent intent);
 
 
     public class MyServiceBinder extends Binder {
