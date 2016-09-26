@@ -24,9 +24,8 @@ public class TableActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.table_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new TableRecyclerViewAdapter(this, tableOf, tableUpto));
-
-
+        TableRecyclerViewAdapter adapter = new TableRecyclerViewAdapter(this, tableOf, tableUpto);
+        recyclerView.setAdapter(adapter);
     }
 
     public static Intent createNewIntent(Context context, int tableOf, int tableUpto) {
