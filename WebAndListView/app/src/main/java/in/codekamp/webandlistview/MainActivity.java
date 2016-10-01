@@ -11,6 +11,12 @@ public class MainActivity extends AppCompatActivity {
     private WebView mWebView;
     private ListView mListView;
 
+    // ButterKnife tutorial
+    // http://craftedcourses.io/all-about-butter-knife-part-1/
+
+    // News app API
+    // news.vaetas.com/stories?page=1
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
